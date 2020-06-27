@@ -44,11 +44,11 @@ class StringExtension {
         fun halve(string: String): Pair<String, String> {
             if (string.length % 2 == 0) {
                 val half = string.length / 2
-                return Pair(string.substring(0, half - 1), string.substring(half, string.length - 1))
+                return Pair(string.substring(0, half), string.substring(half, string.length))
             }
             val flooredHalf = floor((string.length / 2).toDouble()).toInt()
             // leave the middle character behind
-            return Pair(string.substring(0, flooredHalf -1), string.substring(flooredHalf + 1, string.length - 1))
+            return Pair(string.substring(0, flooredHalf), string.substring(flooredHalf + 1, string.length))
         }
     }
 }
