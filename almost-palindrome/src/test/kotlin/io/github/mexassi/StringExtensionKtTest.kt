@@ -1,7 +1,6 @@
 package io.github.mexassi
 
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 internal class StringExtensionKtTest {
@@ -22,5 +21,15 @@ internal class StringExtensionKtTest {
         assertNotNull(pair)
         assertEquals("AB", pair.first)
         assertEquals("BA", pair.second)
+    }
+
+    @Test
+    fun almostPalindrome() {
+        assertTrue("MADIM".almostPalindrome())
+        assertTrue("1234322".almostPalindrome())
+        assertFalse("1234333".almostPalindrome())
+        assertFalse("MADAM".almostPalindrome())
+        assertFalse("1234321".almostPalindrome())
+        assertFalse("ABBA".almostPalindrome())
     }
 }

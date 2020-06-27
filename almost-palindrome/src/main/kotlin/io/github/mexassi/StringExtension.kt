@@ -12,7 +12,7 @@ private fun isAlmostPalindrome(string: String): Boolean {
     // halve the string
     val pair = StringExtension.halve(string)
     val firstHalf = pair.first
-    val reversedSecondHalf = pair.second
+    val reversedSecondHalf = pair.second.reversed()
 
     if (firstHalf == reversedSecondHalf) {
         // this is a palindrome
@@ -22,11 +22,14 @@ private fun isAlmostPalindrome(string: String): Boolean {
     for ((index, value) in reversedSecondHalf.withIndex()) {
         val mirror = firstHalf[index]
         if (value != mirror) {
+            if (index == reversedSecondHalf.length - 1) {
+                return true;
+            }
             // the first difference has been found
-            val remainingFirstHalf = firstHalf.substring(index + 1, firstHalf.length - 1)
-            val remainingSeconfHalf = reversedSecondHalf.substring(index + 1, remainingFirstHalf.length - 1)
+            val remainingFirstHalf = firstHalf.substring(index + 1, firstHalf.length)
+            val remainingSecondHalf = reversedSecondHalf.substring(index + 1, reversedSecondHalf.length)
             // returns whether there are more differences or this is just one char away from being a palindrome
-            return remainingFirstHalf == remainingSeconfHalf
+            return remainingFirstHalf == remainingSecondHalf
         }
     }
     return false
