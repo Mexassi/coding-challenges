@@ -4,9 +4,9 @@ package kotlin.io.github.mexassi
  * Check whether the string is almost a palindrome, meaning the string is 1 char away from being a palindrome
  * @return true if the string is almost a palindrome or false when not
  */
-fun String.isAlmostPalindrome() = _isAlmostPalindrome(this)
+fun String.almostPalindrome() = _almostPalindrome(this)
 
-private fun _isAlmostPalindrome(string: String): Boolean {
+private fun _almostPalindrome(string: String): Boolean {
     // halve the string
     val pair = StringExtension.halve(string)
     val firstHalf = pair.first
