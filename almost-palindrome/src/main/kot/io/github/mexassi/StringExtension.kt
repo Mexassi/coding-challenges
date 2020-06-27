@@ -1,12 +1,14 @@
-package kotlin.io.github.mexassi
+package io.github.mexassi
+
+import kotlin.math.floor
 
 /**
  * Check whether the string is almost a palindrome, meaning the string is 1 char away from being a palindrome
  * @return true if the string is almost a palindrome or false when not
  */
-fun String.almostPalindrome() = _almostPalindrome(this)
+fun String.almostPalindrome() = isAlmostPalindrome(this)
 
-private fun _almostPalindrome(string: String): Boolean {
+private fun isAlmostPalindrome(string: String): Boolean {
     // halve the string
     val pair = StringExtension.halve(string)
     val firstHalf = pair.first
@@ -44,7 +46,7 @@ class StringExtension {
                 val half = string.length / 2
                 return Pair(string.substring(0, half - 1), string.substring(half, string.length - 1))
             }
-            val flooredHalf = Math.floor((string.length / 2).toDouble()).toInt()
+            val flooredHalf = floor((string.length / 2).toDouble()).toInt()
             // leave the middle character behind
             return Pair(string.substring(0, flooredHalf -1), string.substring(flooredHalf + 1, string.length - 1))
         }
