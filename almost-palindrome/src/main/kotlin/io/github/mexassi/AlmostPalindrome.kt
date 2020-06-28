@@ -13,8 +13,9 @@ import io.github.mexassi.strings.halve
 fun String.almostPalindrome() = isAlmostPalindrome(this)
 
 private fun isAlmostPalindrome(string: String): Boolean {
+    val s = string.toLowerCase()
     // halve the string
-    val triple = string.halve()
+    val triple = s.halve()
     val firstHalf = triple.first
     val reversedSecondHalf = triple.second.reversed()
 

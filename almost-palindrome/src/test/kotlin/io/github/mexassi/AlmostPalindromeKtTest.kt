@@ -9,7 +9,7 @@ internal class AlmostPalindromeKtTest {
     @Test
     fun almostPalindrome() {
         // those are 1 char away from being palindrome
-        assertTrue("MADIM".almostPalindrome())
+        assertTrue("MADIm".almostPalindrome())
         assertTrue("1234322".almostPalindrome())
         // this is 2 chars away from being palindrome
         assertFalse("1234333".almostPalindrome())
