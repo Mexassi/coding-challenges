@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
-internal class StringExtensionKtTest {
+internal class AlmostPalindromeKtTest {
 
     @Test
     @DisplayName("Halve odd length string should leave the middle char behind")
