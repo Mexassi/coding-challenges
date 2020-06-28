@@ -18,7 +18,7 @@ private fun palindromicAnagram(string: String): Boolean {
         // add the char when the list is empty and continue
         if (list.isEmpty()) {
             list.add(char)
-            continue;
+            continue
         }
 
         if (list.contains(char)) {
