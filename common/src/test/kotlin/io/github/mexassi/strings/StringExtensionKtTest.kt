@@ -26,4 +26,12 @@ internal class StringExtensionKtTest {
         assertEquals("BA", triple.second)
         assertEquals("", triple.third)
     }
+
+    @Test
+    fun isAlphaNumeric() {
+        assertTrue("asoidhasASDds1209370oolksnada".isAlphaNumeric())
+        assertFalse("asoidhasASDds1209370oolksnada!".isAlphaNumeric())
+        assertFalse("asoidhasASDds1209370oolks nada".isAlphaNumeric())
+        assertFalse("asoidh,asASDds1209370oolksnada".isAlphaNumeric())
+    }
 }
