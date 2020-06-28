@@ -1,6 +1,6 @@
 package io.github.mexassi
 
-import kotlin.math.floor
+import io.github.mexassi.strings.halve
 
 /**
  * Check whether the string is almost a palindrome, meaning the string is 1 char away from being a palindrome.
@@ -14,9 +14,9 @@ fun String.almostPalindrome() = isAlmostPalindrome(this)
 
 private fun isAlmostPalindrome(string: String): Boolean {
     // halve the string
-    val pair = StringExtension.halve(string)
-    val firstHalf = pair.first
-    val reversedSecondHalf = pair.second.reversed()
+    val triple = string.halve()
+    val firstHalf = triple.first
+    val reversedSecondHalf = triple.second.reversed()
 
     if (firstHalf == reversedSecondHalf) {
         // this is a palindrome
@@ -38,25 +38,4 @@ private fun isAlmostPalindrome(string: String): Boolean {
         }
     }
     return false
-}
-
-class StringExtension {
-    companion object {
-        /**
-         * Function that halves a string into a pair containing the first and second half of the string
-         * When the string length is an odd number the middle char is left behind
-         *
-         * @param string the string to halve
-         * @return a pair containing the first and second half of the string
-         */
-        fun halve(string: String): Pair<String, String> {
-            if (string.length % 2 == 0) {
-                val half = string.length / 2
-                return Pair(string.substring(0, half), string.substring(half, string.length))
-            }
-            val flooredHalf = floor((string.length / 2).toDouble()).toInt()
-            // leave the middle character behind
-            return Pair(string.substring(0, flooredHalf), string.substring(flooredHalf + 1, string.length))
-        }
-    }
 }

@@ -2,3 +2,4 @@ rootProject.name = 'coding-challenges'
 
 include 'almost-palindrome'
 include 'palindromic-anagrams'
+include 'common'
