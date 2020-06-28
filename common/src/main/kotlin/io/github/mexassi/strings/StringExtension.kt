@@ -14,6 +14,11 @@ fun String.hasEvenLength() = _hasEvenLength(this)
  */
 fun String.halve() = _halve(this)
 
+/**
+ * Checks whether a string contains alpha-numeric characters only
+ * @param string the string to check the chars for
+ * @return true when the string only contains alpha-numeric characters, false otherwise
+ */
 fun String.isAlphaNumeric() = _isAlphaNumeric(this)
 
 private fun _hasEvenLength(string: String): Boolean {
@@ -33,11 +38,6 @@ private fun _halve(string: String) : Triple<String, String, String> {
         string.substring(half, half + 1))
 }
 
-/**
- * Checks whether a string contains alpha-numeric characters only
- * @param string the string to check the chars for
- * @return true when the string only contains alpha-numeric characters, false otherwise
- */
 private fun _isAlphaNumeric(string: String): Boolean {
     for (char in string) {
         if (!char.isLetterOrDigit()) {
