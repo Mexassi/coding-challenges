@@ -3,7 +3,11 @@ package io.github.mexassi
 import kotlin.math.floor
 
 /**
- * Check whether the string is almost a palindrome, meaning the string is 1 char away from being a palindrome
+ * Check whether the string is almost a palindrome, meaning the string is 1 char away from being a palindrome.
+ * The function splits the string into 2 equal halves (the middle char is left behind for odd length strings).
+ * The second half of the string is reversed and then each char is checked against it's mirroring char from the first
+ * half. Once the first difference is found, the function returns whether there are more differences in the remaining
+ * halves.
  * @return true if the string is almost a palindrome or false when not
  */
 fun String.almostPalindrome() = isAlmostPalindrome(this)
