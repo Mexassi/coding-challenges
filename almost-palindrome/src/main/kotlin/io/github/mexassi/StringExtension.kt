@@ -22,13 +22,14 @@ private fun isAlmostPalindrome(string: String): Boolean {
     for ((index, value) in reversedSecondHalf.withIndex()) {
         val mirror = firstHalf[index]
         if (value != mirror) {
+            // the first difference has been found
             if (index == reversedSecondHalf.length - 1) {
+                // if this is the last char of the string, there are be no more differences
                 return true;
             }
-            // the first difference has been found
+            // returns whether there are more differences or this is just one char away from being a palindrome
             val remainingFirstHalf = firstHalf.substring(index + 1, firstHalf.length)
             val remainingSecondHalf = reversedSecondHalf.substring(index + 1, reversedSecondHalf.length)
-            // returns whether there are more differences or this is just one char away from being a palindrome
             return remainingFirstHalf == remainingSecondHalf
         }
     }
