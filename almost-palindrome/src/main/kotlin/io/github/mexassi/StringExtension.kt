@@ -24,7 +24,7 @@ private fun isAlmostPalindrome(string: String): Boolean {
         if (value != mirror) {
             // the first difference has been found
             if (index == reversedSecondHalf.length - 1) {
-                // if this is the last char of the string, there are be no more differences
+                // if this is the last char of the string, there are no more differences
                 return true;
             }
             // returns whether there are more differences or this is just one char away from being a palindrome
