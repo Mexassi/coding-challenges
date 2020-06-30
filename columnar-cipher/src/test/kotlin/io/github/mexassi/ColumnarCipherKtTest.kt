@@ -9,9 +9,10 @@ internal class ColumnarCipherKtTest {
 
     @Test
     fun cipher_unencrypted() {
-        ColumnarCipher.cipher("I am Massimo", "secret")
+        val encrypted = ColumnarCipher.cipher("I am Massimo", "secret")
         println("-------------------------------------------------")
-        ColumnarCipher.cipher("s002c7xmo7002ha92627xmm79267ai2c700is61792", "secret")
+        println(encrypted)
+//        ColumnarCipher.cipher("s002c7xmo7002ha92627xmm79267ai2c700is61792", "secret")
         // s002c7x mo7002h a92627x mm79267 ai2c700 is61792
         // I am Massimo
         // i, a, m, m, a, s,

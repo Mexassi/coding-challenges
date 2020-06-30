@@ -8,15 +8,31 @@ import kotlin.streams.toList
 
 class StringMatrix(private val string: String, private val key: String) {
 
-    private val code: Array<Char>
+    private val codes: Array<Int>
     private val matrix: Array<Array<Char>>
     private val wordsLength: IntArray
     private val possibleChars = "abcdefghijklmnopqrstuvwxyz"
 
     init {
-        code = codeFor(key)
+        codes = codeFor(key)
         wordsLength = computeWordsLength()
         matrix = initMatrix()
+    }
+
+    fun getKey(): String {
+        return key
+    }
+
+    fun getString(): String {
+        return string
+    }
+
+    fun getCodes(): Array<Int> {
+        return codes
+    }
+
+    fun getMatrix(): Array<Array<Char>> {
+        return matrix
     }
 
     fun printMatrix() {
@@ -27,8 +43,8 @@ class StringMatrix(private val string: String, private val key: String) {
             println("")
         }
 
-        for (c in code) {
-            print("${c.toInt()}, ")
+        for (c in codes) {
+            print("${c}, ")
         }
         println()
     }
@@ -64,8 +80,7 @@ class StringMatrix(private val string: String, private val key: String) {
 
         val chunked = s.chunked(rows)
 
-        for ((index, value) in code.withIndex()) {
-            val n = value.toInt()
+        for ((index, n) in codes.withIndex()) {
             // get the chuncked string at n
             val current = chunked[n]
             for ((position, char) in current.withIndex()) {
@@ -133,7 +148,7 @@ class StringMatrix(private val string: String, private val key: String) {
 
 
     private companion object {
-        fun codeFor(key: String): Array<Char> {
+        fun codeFor(key: String): Array<Int> {
             val size = key.length
             val hashCode = abs(key.hashCode())
             val hashCodeChars = hashCode.toString().toCharArray()
@@ -148,21 +163,21 @@ class StringMatrix(private val string: String, private val key: String) {
                 }
             }
 
-            val codes = arrayListOf<Char>()
+            val codes = arrayListOf<Int>()
 
             for (n in candidates) {
-                codes.add(n.toChar())
+                codes.add(n)
             }
 
             var index = 0
 
             while (codes.size < key.length) {
-                if (codes.contains(index.toChar())) {
+                if (codes.contains(index)) {
                     index++
                     continue
                 }
 
-                codes.add(index.toChar())
+                codes.add(index)
             }
 
             return codes.toTypedArray().reversedArray()
