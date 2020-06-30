@@ -9,6 +9,5 @@ internal class ColumnarCipherKtTest {
     @Test
     fun cipher_unencrypted() {
         ColumnarCipher.cipher("I am Massimo", "secret")
-
     }
 }

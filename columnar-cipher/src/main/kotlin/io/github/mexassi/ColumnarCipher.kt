@@ -7,6 +7,8 @@ class ColumnarCipher {
 
             val cc = StringMatrix(string, key)
 
+            cc.printMatrix()
+
             return ""
         }
     }
