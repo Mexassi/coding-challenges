@@ -14,7 +14,7 @@ class StringMatrix(private val string: String, private val key: String) {
     private val possibleChars = "abcdefghijklmnopqrstuvwxyz"
 
     init {
-        codes = codeFor(key)
+        codes = codeFor()
         wordsLength = computeWordsLength()
         matrix = initMatrix()
     }
@@ -100,7 +100,7 @@ class StringMatrix(private val string: String, private val key: String) {
     private fun decryptedMatrix(): Array<Array<Char>> {
         val cs = cleanString(string)
         // TODO maybe use multiplication
-        val s = cs + wordsLength.map { (abs(key.hashCode()) + it).toString() + randomChar() }
+        val s = cs + wordsLength.map { (codeKey() + it).toString() + randomChar() }
                 .joinToString("")
         val cols = key.length
         val size = s.length
@@ -146,41 +146,48 @@ class StringMatrix(private val string: String, private val key: String) {
                 .toLowerCase()
     }
 
+    private fun codeFor(): Array<Int> {
+        val size = key.length
+        val hashCode = codeKey()
+        val hashCodeChars = hashCode.toString().toCharArray()
+        val candidates = arrayListOf<Int>()
 
-    private companion object {
-        fun codeFor(key: String): Array<Int> {
-            val size = key.length
-            val hashCode = abs(key.hashCode())
-            val hashCodeChars = hashCode.toString().toCharArray()
-            val candidates = arrayListOf<Int>()
-
-            for (char in hashCodeChars) {
-                val num: Int = Integer.valueOf(char.toString())
-                if (num < size) {
-                    if (!candidates.contains(num)) {
-                        candidates.add(num)
-                    }
+        for (char in hashCodeChars) {
+            val num: Int = Integer.valueOf(char.toString())
+            if (num < size) {
+                if (!candidates.contains(num)) {
+                    candidates.add(num)
                 }
             }
-
-            val codes = arrayListOf<Int>()
-
-            for (n in candidates) {
-                codes.add(n)
-            }
-
-            var index = 0
-
-            while (codes.size < key.length) {
-                if (codes.contains(index)) {
-                    index++
-                    continue
-                }
-
-                codes.add(index)
-            }
-
-            return codes.toTypedArray().reversedArray()
         }
+
+        val codes = arrayListOf<Int>()
+
+        for (n in candidates) {
+            codes.add(n)
+        }
+
+        var index = 0
+
+        while (codes.size < key.length) {
+            if (codes.contains(index)) {
+                index++
+                continue
+            }
+
+            codes.add(index)
+        }
+
+        return codes.toTypedArray().reversedArray()
+    }
+
+    fun codeKey(): Int {
+        val hashCode = key.hashCode()
+
+        if (hashCode < 0) {
+            return abs(hashCode)
+        }
+
+        return hashCode
     }
 }
