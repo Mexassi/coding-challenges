@@ -1,16 +1,21 @@
 package io.github.mexassi
 
 import io.github.mexassi.strings.isAlphaNumeric
+import java.util.*
 import kotlin.math.abs
 import kotlin.math.ceil
+import kotlin.streams.toList
 
 class StringMatrix(private val string: String, private val key: String) {
 
     private val code: Array<Char>
     private val matrix: Array<Array<Char>>
+    private val wordsLength: IntArray
+    private val possibleChars = "abcdefghijklmnopqrstuvwxyz"
 
     init {
         code = codeFor(key)
+        wordsLength = computeWordsLength()
         matrix = initMatrix()
     }
 
@@ -28,6 +33,16 @@ class StringMatrix(private val string: String, private val key: String) {
         println()
     }
 
+    private fun computeWordsLength(): IntArray {
+        // TODO add a 0 when the word is capital?
+        val words = string.trim().split(" ")
+
+        return words.stream()
+                .map { it.length }
+                .toList()
+                .toIntArray()
+    }
+
     private fun initMatrix(): Array<Array<Char>> {
         if (!string.isAlphaNumeric()) {
             // this is an encrypted message
@@ -38,11 +53,40 @@ class StringMatrix(private val string: String, private val key: String) {
     }
 
     private fun encryptedMatrix(): Array<Array<Char>> {
-        return emptyArray()
+        val s = cleanString(string)
+        // TODO maybe use multiplication
+        val cols = key.length
+        val size = s.length
+
+        var rows = ceil(((size).toDouble() / (cols).toDouble())).toInt()
+
+        val m: Array<Array<Char>> =  Array(rows) { CharArray(cols).toTypedArray() }
+
+        val chunked = s.chunked(rows)
+
+        for ((index, value) in code.withIndex()) {
+            val n = value.toInt()
+            // get the chuncked string at n
+            val current = chunked[n]
+            for ((position, char) in current.withIndex()) {
+                // get the array if exists
+                val a = m[position]
+                a[index] = char
+            }
+        }
+
+        return m
+    }
+
+    private fun randomChar(): Char {
+        return possibleChars[Random().nextInt(possibleChars.length)]
     }
 
     private fun decryptedMatrix(): Array<Array<Char>> {
-        val s = cleanString(string)
+        val cs = cleanString(string)
+        // TODO maybe use multiplication
+        val s = cs + wordsLength.map { (abs(key.hashCode()) + it).toString() + randomChar() }
+                .joinToString("")
         val cols = key.length
         val size = s.length
 
@@ -83,7 +127,8 @@ class StringMatrix(private val string: String, private val key: String) {
             }
         }
 
-        return chars.joinToString("").toLowerCase()
+        return chars.joinToString("")
+                .toLowerCase()
     }
 
 
